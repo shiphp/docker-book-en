@@ -6,7 +6,7 @@ Before we can connect a database, we need to make sure that our PHP container ha
 
 ## Creating a Custom Dockerfile
 
-In the root of your `weather-app` project, next to the `index.php` file, create a new file called simply `Dockerfile`. Dockerfiles have no extension, and are used by Docker to configure and set up images. All the images on [Docker Hub](https://hub.docker.com/) have a corresponding Dockerfile, and usually you can find them on Github. [PHP's Dockerfiles are here](https://github.com/docker-library/php), but they may be a little confusing since they build on one-another. Our Dockerfile will be much simpler:
+In the root of your `weather-app` project, next to the `index.php` file, create a new file called simply `Dockerfile`. Dockerfiles have no extension, and are used by Docker to configure and set up images. All the images on [Docker Hub](https://hub.docker.com/) have a corresponding Dockerfile, and usually you can find them on GitHub. [PHP's Dockerfiles are here](https://github.com/docker-library/php), but they may be a little confusing since they build on one-another. Our Dockerfile will be much simpler:
 
 #### Dockerfile
 
@@ -51,7 +51,7 @@ The [Docker build](https://docs.docker.com/engine/reference/commandline/build/) 
 
 * `.` - The dot lets Docker know the "context" of our build - in this case, it's the current directory. You can also use an absolute path like `/Users/username/weather-app` if you know the exact path of your Dockerfile. Docker automatically builds this image in the context of the directory containing your Dockerfile, so make sure your Dockerfile is located at the root of your project.
 
-* `-t shiphp/weather-app` - The -t flag sets a "tag" for your image. This tag will allow you to more easily create a container from the image or push the image to a registry to share it with others.
+* `-t shiphp/weather-app` - The `-t` flag sets a "tag" for your image. This tag will allow you to more easily create a container from the image or push the image to a registry to share it with others.
 
 You can see a list of all the Docker images on your local machine by running `$ docker images`. When you run this command, you should see something like this in your terminal:
 
@@ -86,7 +86,7 @@ When you run the above docker run command, Docker will get the latest version of
 
 * `-e MYSQL_RANDOM_ROOT_PASSWORD=true` - Your root user password should be set to something random as you're not going to be logging in with the root user anyway.
 
-* `mysql:5.7` As with the PHP image, you can choose a version of MySQL to use. Here I've elected to use the version 5.7.
+* `mysql:5.7` - As with the PHP image, you can choose a version of MySQL to use. Here I've elected to use the version 5.7.
 
 As with the `php:apache` image, the default image command is fine, so we don't need to add anything after the image.
 
@@ -207,7 +207,7 @@ $ docker run -d --rm --name weather-db -e MYSQL_USER=admin -e MYSQL_DATABASE=wea
 
 ### What's going on here?
 
-The only thing we added to this docker run command was -v $(pwd)/.data:/var/lib/mysql. This mounts a volume from our local directory into the MySQL container. A new directory will appear (.data/) and as the database container starts up, folders and files will appear. These are the files that MySQL uses to store your data, and you can view the files being created from your terminal:
+The only thing we added to this docker run command was `-v $(pwd)/.data:/var/lib/mysql`. This mounts a volume from our local directory into the MySQL container. A new directory will appear (`.data/`) and as the database container starts up, folders and files will appear. These are the files that MySQL uses to store your data, and you can view the files being created from your terminal:
 
 {linenos=off, lang=sh}
 ~~~~~~~
@@ -516,7 +516,7 @@ Finally, you can see the environmental variables your container is using:
 
 {linenos=off, lang=sh}
 ~~~~~~~
-$ docker inspect weather-app</td>
+$ docker inspect weather-app
 ~~~~~~~
 
 The JSON returned from this command gives you a lot of information about a running container, but for this example, we just care about the array at `Config.Env`:
@@ -534,4 +534,4 @@ The JSON returned from this command gives you a lot of information about a runni
 //...
 ~~~~~~~
 
-If everything worked correctly, you should now be able to access the application as before. In the next chapter, we'll take a quick look at how we might improve this application using advanced Docker topics. If you want to take a look at the complete source code for this app, it's [available on Github](https://github.com/shiphp/weather-app).
+If everything worked correctly, you should now be able to access the application as before. In the next chapter, we'll take a quick look at how we might improve this application using advanced Docker topics. If you want to take a look at the complete source code for this app, it's [available on GitHub](https://github.com/shiphp/weather-app).
