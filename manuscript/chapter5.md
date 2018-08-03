@@ -36,6 +36,6 @@ While this book doesn't cover the above topics in detail, there are many great f
 
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/docker) - Very specific questions can be found here, but some of the more popular questions will also reveal helpful best practices in their answers.
 
-* [The New Stack's Docker Book Series](https://thenewstack.io/ebookseries/) - Good for an overview of terminology and tools available for developing with Docker. This book series is pretty high-level.
+* [The New Stack's Docker Book Series](https://thenewstack.io/ebooks/) - Good for an overview of terminology and tools available for developing with Docker. This book series is pretty high-level.
 
-In addition, we regularly post Docker tips and tutorials on the [shiphp.com blog](https://www.shiphp.com/#blog). Posts there relate to building PHP applications on Docker using specific frameworks like Wordpress or Laravel as well as general PHP topics and updates on the language.
+In addition, we regularly post Docker tips and tutorials on the [shiphp.com blog](https://www.shiphp.com/#blog). Posts there relate to building PHP applications on Docker using specific frameworks like WordPress or Laravel as well as general PHP topics and updates on the language.
