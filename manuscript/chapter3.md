@@ -91,9 +91,9 @@ This single file creates two API endpoints that simply return text for now. In c
 
 * `$app = new \Slim\App();` - This creates a new Slim PHP application instance. Slim can handle middleware and help with dependency injection as well, but for now we're just using its routing methods.
 
-* `$app->get('/locations/{id}', function ($request, $response, $args) {...});` - This first endpoint handles GET requests to an endpoint that follows the pattern /locations/{id} where id will be a unique indicator for a location. We'll go into more detail about this endpoint and the callback function later in the tutorial.
+* `$app->get('/locations/{id}', function ($request, $response, $args) {...});` - This first endpoint handles GET requests to an endpoint that follows the pattern `/locations/{id}` where id will be a unique indicator for a location. We'll go into more detail about this endpoint and the callback function later in the tutorial.
 
-* `$app->delete('/locations/{id}', function ($request, $response, $args) {...});` - This second endpoint handles DELETE requests to an endpoint that follows the pattern /locations/{id}. This will be for deleting the weather details for a specific location stored in our database.
+* `$app->delete('/locations/{id}', function ($request, $response, $args) {...});` - This second endpoint handles DELETE requests to an endpoint that follows the pattern `/locations/{id}`. This will be for deleting the weather details for a specific location stored in our database.
 
 * `$app->run();` - Finally, this line runs the Slim application, enabling any endpoints defined above. This is usually the last line in any Slim project.
 
@@ -205,7 +205,7 @@ Now in your terminal, run:
 $ docker run --rm -v $(pwd):/app composer:latest update
 ~~~~~~~
 
-The container will install the new packages and update your composer.lock file. During this process, you should see some output like this in the terminal:
+The container will install the new packages and update your `composer.lock` file. During this process, you should see some output like this in the terminal:
 
 {linenos=off, lang=sh}
 ~~~~~~~
@@ -264,13 +264,13 @@ $app->run();
 
 ### What's going on here?
 
-We've made some updates - mostly to the get('/locations/{id}', ...) endpoint. Let's take a look at what's new here:
+We've made some updates - mostly to the `get('/locations/{id}', ...)` endpoint. Let's take a look at what's new here:
 
-* `$container = new \Slim\Container([...]);` - If you're not familiar with Slim's Dependency Injection system, you can [read up on it here](https://www.slimframework.com/docs/concepts/di.html). Since this book isn't focused on dependency injection, I'll just say that this injects Guzzle into the application so we can use it in any of our routes by calling $this->http. It makes our code more concise, and allows us to mock the library if we add tests to the application later.
+* `$container = new \Slim\Container([...]);` - If you're not familiar with Slim's Dependency Injection system, you can [read up on it here](https://www.slimframework.com/docs/concepts/di.html). Since this book isn't focused on dependency injection, I'll just say that this injects Guzzle into the application so we can use it in any of our routes by calling `$this->http`. It makes our code more concise, and allows us to mock the library if we add tests to the application later.
 
-* `$result = $this->http->get("https://www.metaweather.com/api/location/{$args['id']}")...` - This is where we make the call to MetaWeather through Guzzle. As you can see, we're simply passing the locationId from our Slim route into the API endpoint provided by MetaWeather. We also call getBody() and getContents() since we just want to get the response as a string rather than a [stream](http://docs.guzzlephp.org/en/stable/psr7.html#streams).
+* `$result = $this->http->get("https://www.metaweather.com/api/location/{$args['id']}")...` - This is where we make the call to MetaWeather through Guzzle. As you can see, we're simply passing the locationId from our Slim route into the API endpoint provided by MetaWeather. We also call `getBody()` and `getContents()` since we just want to get the response as a string rather than a [stream](http://docs.guzzlephp.org/en/stable/psr7.html#streams).
 
-* `return $response->withStatus(200)->withJson(json_decode($result));` - Finally, we respond with a 200 response code and withJson(...). Slim provides this method to automatically set JSON response headers, but because the response from MetaWeather came back as a JSON string, we have to run json_decode on it before re-encoding it into JSON.
+* `return $response->withStatus(200)->withJson(json_decode($result));` - Finally, we respond with a 200 response code and `withJson(...)`. Slim provides this method to automatically set JSON response headers, but because the response from MetaWeather came back as a JSON string, we have to run `json_decode` on it before re-encoding it into JSON.
 
 ### Testing it out
 
